@@ -1,0 +1,210 @@
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateArticles (20141202213901)
+  [1m[35m (0.5ms)[0m  BEGIN
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/preethamnadig/Coding/rails/recipes-blog/db/migrate/20141202213901_create_articles.rb:7)
+  [1m[36m (13.6ms)[0m  [1mCREATE TABLE "articles" ("id" serial primary key, "title" character varying, "text" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20141202213901"]]
+  [1m[36m (1.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateComments (20141203020035)
+  [1m[35m (0.2ms)[0m  BEGIN
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/preethamnadig/Coding/rails/recipes-blog/db/migrate/20141203020035_create_comments.rb:8)
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "comments" ("id" serial primary key, "commenter" character varying, "body" text, "article_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.2ms)[0m  CREATE  INDEX  "index_comments_on_article_id" ON "comments"  ("article_id")
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20141203020035"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (4.4ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'articles'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (4.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'comments'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+
+
+Started GET "/" for ::1 at 2015-05-25 12:18:19 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 1444ms (Views: 1435.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/articles.self.css?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/comments.self.css?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/welcome.self.css?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/application.self.css?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/jquery.self.js?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/turbolinks.self.js?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/articles.self.js?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/comments.self.js?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/welcome.self.js?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/assets/application.self.js?body=1" for ::1 at 2015-05-25 12:18:21 +0800
+
+
+Started GET "/articles" for ::1 at 2015-05-25 12:18:23 +0800
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.6ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 56ms (Views: 49.1ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-05-25 12:18:24 +0800
+Processing by ArticlesController#new as HTML
+Filter chain halted as #<Proc:0x007f8816a55a50@/Users/preethamnadig/.rvm/gems/ruby-2.2.0/gems/actionpack-4.2.1/lib/action_controller/metal/http_authentication.rb:69> rendered or redirected
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-05-25 12:18:29 +0800
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (19.0ms)
+  Rendered articles/new.html.erb within layouts/application (23.6ms)
+Completed 200 OK in 79ms (Views: 71.7ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/articles" for ::1 at 2015-05-25 12:18:34 +0800
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"huAQGwu7I09pOTPO3En8WxnNKjRenuxxgOcmMhLlQ6wFl9zwE29+jFfZCfIkcCJqa/E8+qBMYBCmhsKVUo3+iQ==", "article"=>{"title"=>"Test", "text"=>"Test"}, "commit"=>"Create Article"}
+Filter chain halted as #<Proc:0x007f8816a55a50@/Users/preethamnadig/.rvm/gems/ruby-2.2.0/gems/actionpack-4.2.1/lib/action_controller/metal/http_authentication.rb:69> rendered or redirected
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-05-25 12:18:34 +0800
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"huAQGwu7I09pOTPO3En8WxnNKjRenuxxgOcmMhLlQ6wFl9zwE29+jFfZCfIkcCJqa/E8+qBMYBCmhsKVUo3+iQ==", "article"=>{"title"=>"Test", "text"=>"Test"}, "commit"=>"Create Article"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.6ms)[0m  ROLLBACK
+  Rendered articles/_form.html.erb (5.7ms)
+  Rendered articles/new.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 85ms (Views: 79.2ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/assets/articles.self.css?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/comments.self.css?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/welcome.self.css?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/application.self.css?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/jquery.self.js?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/turbolinks.self.js?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/articles.self.js?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/comments.self.js?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/welcome.self.js?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started GET "/assets/application.self.js?body=1" for ::1 at 2015-05-25 12:18:35 +0800
+
+
+Started POST "/articles" for ::1 at 2015-05-25 12:18:43 +0800
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Y+nGlmRG9o4dG6jZaZ7rckSO+p9YfDp2MOaEwMC5197gngp9fJKrTSP7kuWRpzVDNrLsUaauthcWh2BngNFq+w==", "article"=>{"title"=>"Test Article", "text"=>"Test"}, "commit"=>"Create Article"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "articles" ("title", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["title", "Test Article"], ["text", "Test"], ["created_at", "2015-05-25 04:18:43.127902"], ["updated_at", "2015-05-25 04:18:43.127902"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 9ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/articles/1" for ::1 at 2015-05-25 12:18:43 +0800
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArticle Load (1.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mComment Load (0.7ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = $1[0m  [["article_id", 1]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (11.0ms)
+  Rendered articles/show.html.erb within layouts/application (37.8ms)
+Completed 200 OK in 85ms (Views: 71.4ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/assets/articles.self.css?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/comments.self.css?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/welcome.self.css?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/application.self.css?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/jquery.self.js?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/jquery_ujs.self.js?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/turbolinks.self.js?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/articles.self.js?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/comments.self.js?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/welcome.self.js?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/assets/application.self.js?body=1" for ::1 at 2015-05-25 12:18:43 +0800
+
+
+Started GET "/articles" for ::1 at 2015-05-25 12:18:45 +0800
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.3ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 38ms (Views: 36.8ms | ActiveRecord: 0.3ms)
